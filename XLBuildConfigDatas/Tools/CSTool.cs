@@ -182,46 +182,65 @@ public static class CSTool
                 {
                     if (curSmallClassArrayIndex < smallClassArrayCount)//给表格中的小类赋值
                     {
-                        if (curSmallClassMemberIndex == 0)//小类开始实例化
+                        int forwardIndex = curSmallClassArrayIndex * smallClassMemberCount + curSmallClassMemberIndex + 1;//往前查找，看下有多少组表格结构体.
+                        string structText = sheet.Columns[excelColumn - forwardIndex].CellList[i].DisplayedText;
+                        bool isJump = false;
+                        if(!string.IsNullOrEmpty(structText))
                         {
-                            Type? smallClassType = CSFileAssembly?.GetType(smallClassName);
-                            if (smallClassType == null)
+                            int itemArrayNum=int.Parse(structText);
+                            if(forwardIndex > itemArrayNum * smallClassMemberCount)
                             {
-                                Console.Error.WriteLine("!!!!!!!!! smallClassType is error,please check, smallClassType:" + smallClassType);
+                                isJump = true;
+                            }
+                        }
+                        IMessage? curSmallClass = null;
+                        if (!isJump)
+                        {
+                            if (curSmallClassMemberIndex == 0)//小类开始实例化
+                            {
+                                Type? smallClassType = CSFileAssembly?.GetType(smallClassName);
+                                if (smallClassType == null)
+                                {
+                                    Console.Error.WriteLine("!!!!!!!!! smallClassType is error,please check, smallClassType:" + smallClassType);
+                                    return;
+                                }
+                                IMessage? smallClass = Activator.CreateInstance(smallClassType) as IMessage;
+                                smallConfigClassList[classIndex].Add(smallClass);
+                            }
+
+                            //给小类中的字段赋值
+                            curSmallClass = smallConfigClassList[classIndex][curSmallClassArrayIndex];
+                            PropertyInfo? smallPropertyInfo = curSmallClass.GetType().GetProperty(memberStr);
+                            if (smallPropertyInfo == null)
+                            {
+                                Console.Error.WriteLine($"!!!!!!!!!!!!!!!!! smallClassType do not have {memberStr} attr,please check, class={csName}");
                                 return;
                             }
-                            IMessage? smallClass = Activator.CreateInstance(smallClassType) as IMessage;
-                            smallConfigClassList[classIndex].Add(smallClass);
-                        }
-
-                        //给小类中的字段赋值
-                        IMessage? curSmallClass = smallConfigClassList[classIndex][curSmallClassArrayIndex];
-                        PropertyInfo? smallPropertyInfo = curSmallClass.GetType().GetProperty(memberStr);
-                        if (smallPropertyInfo == null)
-                        {
-                            Console.Error.WriteLine($"!!!!!!!!!!!!!!!!! smallClassType do not have {memberStr} attr,please check, class={csName}");
-                            return;
-                        }
-                        if (structTypeStr == Utils.optional)//普通类型
-                        {
-                            PropertyInfoSetValue(smallPropertyInfo, curSmallClass, memberTypeStr, memberStr, columnList[i].DisplayedText);
-                        }
-                        else if (structTypeStr == Utils.repeated)//数组类型
-                        {
-                            string[] arrayValue = columnList[i].DisplayedText.Split(";");
-                            PropertyInfoArraySetValue(smallPropertyInfo, curSmallClass, sheet, arrayValue, memberTypeStr);
+                            if (structTypeStr == Utils.optional)//普通类型
+                            {
+                                PropertyInfoSetValue(smallPropertyInfo, curSmallClass, memberTypeStr, memberStr, columnList[i].DisplayedText);
+                            }
+                            else if (structTypeStr == Utils.repeated)//数组类型
+                            {
+                                string[] arrayValue = columnList[i].DisplayedText.Split(";");
+                                PropertyInfoArraySetValue(smallPropertyInfo, curSmallClass, sheet, arrayValue, memberTypeStr);
+                            }
                         }
 
                         if (curSmallClassMemberIndex == smallClassMemberCount - 1)//小类赋值完成
                         {
-                            Dictionary<string, IList> smallClassRepeatedDic = allSmallClassRepeatedDicList[classIndex];
-                            IList? repeatedField;
-                            if (!smallClassRepeatedDic.TryGetValue(smallClassName, out repeatedField))
+                            if (curSmallClass != null)
                             {
-                                Console.Error.WriteLine($"!!!!! struct get repeatedField value err,please check, currentClass={smallClassName} memberStr={memberStr}");
-                                return;
+                                Dictionary<string, IList> smallClassRepeatedDic = allSmallClassRepeatedDicList[classIndex];
+                                IList? repeatedField;
+                                if (!smallClassRepeatedDic.TryGetValue(smallClassName, out repeatedField))
+                                {
+                                    Console.Error.WriteLine($"!!!!! struct get repeatedField value err,please check, currentClass={smallClassName} memberStr={memberStr}");
+                                    return;
+                                }
+                                repeatedField.Add(curSmallClass);
                             }
-                            repeatedField.Add(curSmallClass);
+                            
                             if (curSmallClassArrayIndex == smallClassArrayCount-1)
                             {
                                 smallConfigClassList[classIndex].Clear();//清除一下，留给下一个表格结构体赋值
