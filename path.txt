@@ -1,0 +1,6 @@
+Configs=configs
+CS=Datas\CS
+Proto=Datas\Proto
+Bytes=Datas\bytes
+MD5=Datas\md5
+CopyCSToDir=Datas\TempCopyCSDir

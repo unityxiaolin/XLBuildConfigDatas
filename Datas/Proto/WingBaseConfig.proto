@@ -1,0 +1,32 @@
+syntax = "proto3";
+
+message WingBaseConfigDatas
+{
+	repeated WingBaseConfig WingBase=1;//WingBase===>WingBaseConfig类的数组列表类
+}
+
+message WingBaseConfig
+{
+	int32 WingId=1;//WingId===>羽翼id
+	int32 Fighting=2;//Fighting===>战斗力
+	string ImageName=3;//ImageName===>图片名
+	repeated WingBaseItemInfo ItemInfo=4;//ItemInfo===>
+	repeated int32 Param=5;//Param===>其他参数
+	int32 WingNameId=6;//WingNameId===>羽翼名称id
+	repeated WingBaseAAA AAA=7;//AAA===>
+	int64 Int64Value=8;//Int64Value===>Int64Value
+}
+
+message WingBaseItemInfo
+{
+	 uint32 ItemId=1;//ItemId===>初级经验丹id
+	 uint32 ItemNum=2;//ItemNum===>初级经验丹数量
+}
+
+message WingBaseAAA
+{
+	 int32 A1=1;//A1===>A1
+	 uint32 UintA2=2;//UintA2===>UintA2
+	 string A3=3;//A3===>A3
+	repeated string RepeatedA4=4;//RepeatedA4===>RepeatedA4
+}
