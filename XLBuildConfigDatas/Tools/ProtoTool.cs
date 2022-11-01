@@ -15,10 +15,6 @@ public static class ProtoTool
         }
         //Console.WriteLine($"即将生成proto文件的页签名称:{sheet.Name}");
         string filePath = pathMgr.protoPath + sheet.Name + Utils.ConfigClassSuffix + ".proto";
-        if(!Directory.Exists(pathMgr.protoDir))
-        {
-            Directory.CreateDirectory(pathMgr.protoDir);
-        }
         if (File.Exists(filePath))
         {
             File.Delete(filePath);

@@ -13,7 +13,7 @@ namespace Program
         };
         static void Main(string[] args)
         {
-            pathMgr.InitPath();
+            pathMgr.Init();
             
             //GenerateSameCongigs(10);
             //TestReadConfigs();
@@ -82,7 +82,8 @@ namespace Program
         #region 读表测试  已注释，需要时打开
         static void TestReadConfigs()
         {
-            //pathMgr.InitPath();
+            ////需要测试的，可以把TempCopyCSDir的cs文件拷贝到Program.cs的同级目录进行测试，
+            ////或者将path.txt中的CopyCSToDir的路径改到Program.cs的同级目录下重新生成cs文件后测试
             //string bytesFilePath = pathMgr.bytesPath + "WingBaseConfig.bytes";
             //FileStream fileStream = File.OpenRead(bytesFilePath);
             //WingBaseConfigDatas wingBaseConfigDatas = new WingBaseConfigDatas();
@@ -101,8 +102,6 @@ namespace Program
         /// </summary>
         static void BuildConfigs()
         {
-            //pathMgr.InitPath();
-
             if (File.Exists(pathMgr.md5Path + Utils.MD5CSVFile))
             {
                 StreamReader sr = new StreamReader(pathMgr.md5Path + Utils.MD5CSVFile);
@@ -176,7 +175,7 @@ namespace Program
         static void CmdExitedHandler()
         {
             List<string> csNameList = m_sheetDataDic.Keys.ToList();
-            Utils.CopyFileToDir(csNameList);
+            Utils.CopyCSFilesToDir(csNameList);
             CSCompilerTool.CompilerCSFiles(csNameList);
             CSTool.Init();
             //根据cs文件生成bytes文件
@@ -192,6 +191,8 @@ namespace Program
                     Console.Error.WriteLine("!!! donot find sheet data, sheet name:" + csName);
                 }
             }
+            Console.WriteLine("All bytes file generate success!");
+            Utils.CopyBytesFilesToDir(csNameList);//csName is the same of the bytesName
             //生成md5文件
             File.Delete(pathMgr.md5Path + Utils.MD5CSVFile);
             StreamWriter streamWriter = new StreamWriter(pathMgr.md5Path + Utils.MD5CSVFile);
@@ -201,8 +202,7 @@ namespace Program
             }
             streamWriter.Flush();
             streamWriter.Dispose();
-
-            Console.WriteLine("All bytes file generate success!");
+            Console.WriteLine("md5 file write success.");
             Console.WriteLine("=======================打表结束=======================");
         }
     }

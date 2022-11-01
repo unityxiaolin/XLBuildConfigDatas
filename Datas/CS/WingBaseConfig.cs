@@ -258,7 +258,7 @@ public sealed partial class WingBaseConfig : pb::IMessage<WingBaseConfig> {
       = pb::FieldCodec.ForMessage(34, global::WingBaseItemInfo.Parser);
   private readonly pbc::RepeatedField<global::WingBaseItemInfo> itemInfo_ = new pbc::RepeatedField<global::WingBaseItemInfo>();
   /// <summary>
-  ///ItemInfo===>
+  ///ItemInfo===>Struct_3_2代表有3组数据，每组数据有两个
   /// </summary>
   [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
   public pbc::RepeatedField<global::WingBaseItemInfo> ItemInfo {

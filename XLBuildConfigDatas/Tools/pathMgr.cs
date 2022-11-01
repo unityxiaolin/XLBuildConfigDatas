@@ -13,8 +13,10 @@ public static class pathMgr
     public static string md5Path = "";
     public static string CopyCSToPath = "";
     public static string CopyCSToDir = "";
+    public static string CopyBytesToPath = "";
+    public static string CopyBytesToDir = "";
 
-    public static void InitPath()
+    public static void Init()
     {
         StreamReader streamReader = new StreamReader(rootPath + "path.txt");
         string? lineStr;
@@ -52,6 +54,36 @@ public static class pathMgr
                 CopyCSToPath = rootPath + lineArray[1] + "\\";
                 CopyCSToDir = rootPath + lineArray[1];
             }
+            else if (lineArray[0] == "CopyBytesToDir")
+            {
+                CopyBytesToPath = rootPath + lineArray[1] + "\\";
+                CopyBytesToDir = rootPath + lineArray[1];
+            }
+        }
+        //初始化文件夹
+        if (!Directory.Exists(pathMgr.bytesPath))
+        {
+            Directory.CreateDirectory(pathMgr.bytesPath);
+        }
+        if (!Directory.Exists(pathMgr.md5Path))
+        {
+            Directory.CreateDirectory(pathMgr.md5Path);
+        }
+        if (!Directory.Exists(pathMgr.protoDir))
+        {
+            Directory.CreateDirectory(pathMgr.protoDir);
+        }
+        if (!Directory.Exists(pathMgr.csPath))
+        {
+            Directory.CreateDirectory(pathMgr.csPath);
+        }
+        if (!Directory.Exists(pathMgr.CopyCSToDir))
+        {
+            Directory.CreateDirectory(pathMgr.CopyCSToDir);
+        }
+        if (!Directory.Exists(pathMgr.CopyBytesToDir))
+        {
+            Directory.CreateDirectory(pathMgr.CopyBytesToDir);
         }
     }
 }

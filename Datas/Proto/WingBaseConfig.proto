@@ -10,7 +10,7 @@ message WingBaseConfig
 	int32 WingId=1;//WingId===>羽翼id
 	int32 Fighting=2;//Fighting===>战斗力
 	string ImageName=3;//ImageName===>图片名
-	repeated WingBaseItemInfo ItemInfo=4;//ItemInfo===>
+	repeated WingBaseItemInfo ItemInfo=4;//ItemInfo===>Struct_3_2代表有3组数据，每组数据有两个
 	repeated int32 Param=5;//Param===>其他参数
 	int32 WingNameId=6;//WingNameId===>羽翼名称id
 	repeated WingBaseAAA AAA=7;//AAA===>

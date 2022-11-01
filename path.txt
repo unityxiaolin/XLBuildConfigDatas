@@ -4,3 +4,4 @@ Proto=Datas\Proto
 Bytes=Datas\bytes
 MD5=Datas\md5
 CopyCSToDir=Datas\TempCopyCSDir
+CopyBytesToDir=Datas\TempCopyBytesDir

@@ -24,18 +24,9 @@ public static class Utils
     /// </summary>
     public static void GenerateCS(EventHandler cmdExitedHandler)
     {
-        if(!Directory.Exists(pathMgr.protoPath))
-        {
-            Console.WriteLine("不存在proto文件夹:"+ pathMgr.protoPath);
-            return;
-        }
         List<string> cmds = new List<string>();
         DirectoryInfo folder=new DirectoryInfo(pathMgr.protoPath);
         FileInfo[] files = folder.GetFiles("*.proto");
-        if(!Directory.Exists(pathMgr.csPath))
-        {
-            Directory.CreateDirectory(pathMgr.csPath);
-        }
         foreach(FileInfo file in files)
         {
             //string cmd = $"{pathMgr.protocPath} --csharp_out={pathMgr.csDir} --proto_path={pathMgr.protoPath}{file.Name}";
@@ -93,15 +84,11 @@ public static class Utils
 
     #region 复制生成的C#文件到指定目录
 
-    public static void CopyFileToDir(List<string> csNameList)
+    public static void CopyCSFilesToDir(List<string> csNameList)
     {
         if(pathMgr.CopyCSToDir==pathMgr.rootPath)
         {
             return;
-        }
-        if(!Directory.Exists(pathMgr.CopyCSToDir))
-        {
-            Directory.CreateDirectory(pathMgr.CopyCSToDir);
         }
         for (int i = 0; i < csNameList.Count; i++)
         {
@@ -115,4 +102,36 @@ public static class Utils
     }
 
     #endregion
+
+    #region 复制生成的Bytes文件到指定目录
+
+    public static void CopyBytesFilesToDir(List<string> bytesNameList)
+    {
+        if (pathMgr.CopyBytesToDir == pathMgr.rootPath)
+        {
+            return;
+        }
+        for (int i = 0; i < bytesNameList.Count; i++)
+        {
+            FileInfo file = new FileInfo(pathMgr.bytesPath + bytesNameList[i] + ".bytes");
+            file.CopyTo(pathMgr.CopyBytesToPath + file.Name, true);
+        }
+        if (bytesNameList.Count > 0)
+        {
+            Console.WriteLine("all bytes files copy success.");
+        }
+    }
+
+    public static void CopyBytesFilesToDir(string bytesName)
+    {
+        if (pathMgr.CopyBytesToDir == pathMgr.rootPath)
+        {
+            return;
+        }
+        FileInfo file = new FileInfo(pathMgr.bytesPath + bytesName + ".bytes");
+        file.CopyTo(pathMgr.CopyBytesToPath + file.Name, true);
+    }
+
+    #endregion
+
 }
