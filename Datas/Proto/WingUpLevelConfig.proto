@@ -2,7 +2,7 @@ syntax = "proto3";
 
 message WingUpLevelConfigDatas
 {
-	repeated WingUpLevelConfig WingUpLevel=1;//WingUpLevel===>WingUpLevelConfig类的数组列表类
+	repeated WingUpLevelConfig Base=1;//Base===>WingUpLevelConfig类的数组列表类
 }
 
 message WingUpLevelConfig

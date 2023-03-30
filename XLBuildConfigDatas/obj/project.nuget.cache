@@ -1,10 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "9QZc0+idiSq4Tsh1NfmypX0dVGYMT1Gqtno+eWce8yCf08kNqAhDONEx0+rVq7zSvXRFsuhZRFD2A1DyYOyIiw==",
+  "dgSpecHash": "ji0MEAs2hN9TYFIhkB1xAyL+ehvzeQ0DLHkLtsScp8fIUWpxaCJs0n9dXZ6J+hHSm/ww+6OOOkZFTrfvis7R5g==",
   "success": true,
   "projectFilePath": "F:\\XLBuildConfigDatas\\XLBuildConfigDatas\\XLBuildConfigDatas\\XLBuildConfigDatas.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\dmlt\\.nuget\\packages\\google.protobuf\\3.21.7\\google.protobuf.3.21.7.nupkg.sha512",
+    "C:\\Users\\dmlt\\.nuget\\packages\\google.protobuf\\3.22.1\\google.protobuf.3.22.1.nupkg.sha512",
     "C:\\Users\\dmlt\\.nuget\\packages\\microsoft.codeanalysis.analyzers\\3.3.3\\microsoft.codeanalysis.analyzers.3.3.3.nupkg.sha512",
     "C:\\Users\\dmlt\\.nuget\\packages\\microsoft.codeanalysis.common\\4.3.1\\microsoft.codeanalysis.common.4.3.1.nupkg.sha512",
     "C:\\Users\\dmlt\\.nuget\\packages\\microsoft.codeanalysis.csharp\\4.3.1\\microsoft.codeanalysis.csharp.4.3.1.nupkg.sha512",

@@ -22,20 +22,19 @@ public static partial class WingBaseConfigReflection {
   static WingBaseConfigReflection() {
     byte[] descriptorData = global::System.Convert.FromBase64String(
         string.Concat(
-          "ChRXaW5nQmFzZUNvbmZpZy5wcm90byI4ChNXaW5nQmFzZUNvbmZpZ0RhdGFz",
-          "EiEKCFdpbmdCYXNlGAEgAygLMg8uV2luZ0Jhc2VDb25maWcivAEKDldpbmdC",
-          "YXNlQ29uZmlnEg4KBldpbmdJZBgBIAEoBRIQCghGaWdodGluZxgCIAEoBRIR",
-          "CglJbWFnZU5hbWUYAyABKAkSIwoISXRlbUluZm8YBCADKAsyES5XaW5nQmFz",
-          "ZUl0ZW1JbmZvEg0KBVBhcmFtGAUgAygFEhIKCldpbmdOYW1lSWQYBiABKAUS",
-          "GQoDQUFBGAcgAygLMgwuV2luZ0Jhc2VBQUESEgoKSW50NjRWYWx1ZRgIIAEo",
-          "AyIzChBXaW5nQmFzZUl0ZW1JbmZvEg4KBkl0ZW1JZBgBIAEoDRIPCgdJdGVt",
-          "TnVtGAIgASgNIkkKC1dpbmdCYXNlQUFBEgoKAkExGAEgASgFEg4KBlVpbnRB",
-          "MhgCIAEoDRIKCgJBMxgDIAEoCRISCgpSZXBlYXRlZEE0GAQgAygJYgZwcm90",
-          "bzM="));
+          "ChRXaW5nQmFzZUNvbmZpZy5wcm90byI0ChNXaW5nQmFzZUNvbmZpZ0RhdGFz",
+          "Eh0KBEJhc2UYASADKAsyDy5XaW5nQmFzZUNvbmZpZyK8AQoOV2luZ0Jhc2VD",
+          "b25maWcSDgoGV2luZ0lkGAEgASgFEhAKCEZpZ2h0aW5nGAIgASgFEhEKCUlt",
+          "YWdlTmFtZRgDIAEoCRIjCghJdGVtSW5mbxgEIAMoCzIRLldpbmdCYXNlSXRl",
+          "bUluZm8SDQoFUGFyYW0YBSADKAUSEgoKV2luZ05hbWVJZBgGIAEoBRIZCgNB",
+          "QUEYByADKAsyDC5XaW5nQmFzZUFBQRISCgpJbnQ2NFZhbHVlGAggASgDIjMK",
+          "EFdpbmdCYXNlSXRlbUluZm8SDgoGSXRlbUlkGAEgASgNEg8KB0l0ZW1OdW0Y",
+          "AiABKA0iSQoLV2luZ0Jhc2VBQUESCgoCQTEYASABKAUSDgoGVWludEEyGAIg",
+          "ASgNEgoKAkEzGAMgASgJEhIKClJlcGVhdGVkQTQYBCADKAliBnByb3RvMw=="));
     descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
         new pbr::FileDescriptor[] { },
         new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
-          new pbr::GeneratedClrTypeInfo(typeof(global::WingBaseConfigDatas), global::WingBaseConfigDatas.Parser, new[]{ "WingBase" }, null, null, null, null),
+          new pbr::GeneratedClrTypeInfo(typeof(global::WingBaseConfigDatas), global::WingBaseConfigDatas.Parser, new[]{ "Base" }, null, null, null, null),
           new pbr::GeneratedClrTypeInfo(typeof(global::WingBaseConfig), global::WingBaseConfig.Parser, new[]{ "WingId", "Fighting", "ImageName", "ItemInfo", "Param", "WingNameId", "AAA", "Int64Value" }, null, null, null, null),
           new pbr::GeneratedClrTypeInfo(typeof(global::WingBaseItemInfo), global::WingBaseItemInfo.Parser, new[]{ "ItemId", "ItemNum" }, null, null, null, null),
           new pbr::GeneratedClrTypeInfo(typeof(global::WingBaseAAA), global::WingBaseAAA.Parser, new[]{ "A1", "UintA2", "A3", "RepeatedA4" }, null, null, null, null)
@@ -70,7 +69,7 @@ public sealed partial class WingBaseConfigDatas : pb::IMessage<WingBaseConfigDat
 
   [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
   public WingBaseConfigDatas(WingBaseConfigDatas other) : this() {
-    wingBase_ = other.wingBase_.Clone();
+    base_ = other.base_.Clone();
     _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
   }
 
@@ -79,17 +78,17 @@ public sealed partial class WingBaseConfigDatas : pb::IMessage<WingBaseConfigDat
     return new WingBaseConfigDatas(this);
   }
 
-  /// <summary>Field number for the "WingBase" field.</summary>
-  public const int WingBaseFieldNumber = 1;
-  private static readonly pb::FieldCodec<global::WingBaseConfig> _repeated_wingBase_codec
+  /// <summary>Field number for the "Base" field.</summary>
+  public const int BaseFieldNumber = 1;
+  private static readonly pb::FieldCodec<global::WingBaseConfig> _repeated_base_codec
       = pb::FieldCodec.ForMessage(10, global::WingBaseConfig.Parser);
-  private readonly pbc::RepeatedField<global::WingBaseConfig> wingBase_ = new pbc::RepeatedField<global::WingBaseConfig>();
+  private readonly pbc::RepeatedField<global::WingBaseConfig> base_ = new pbc::RepeatedField<global::WingBaseConfig>();
   /// <summary>
-  ///WingBase===>WingBaseConfig类的数组列表类
+  ///Base===>WingBaseConfig类的数组列表类
   /// </summary>
   [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  public pbc::RepeatedField<global::WingBaseConfig> WingBase {
-    get { return wingBase_; }
+  public pbc::RepeatedField<global::WingBaseConfig> Base {
+    get { return base_; }
   }
 
   [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -105,14 +104,14 @@ public sealed partial class WingBaseConfigDatas : pb::IMessage<WingBaseConfigDat
     if (ReferenceEquals(other, this)) {
       return true;
     }
-    if(!wingBase_.Equals(other.wingBase_)) return false;
+    if(!base_.Equals(other.base_)) return false;
     return Equals(_unknownFields, other._unknownFields);
   }
 
   [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
   public override int GetHashCode() {
     int hash = 1;
-    hash ^= wingBase_.GetHashCode();
+    hash ^= base_.GetHashCode();
     if (_unknownFields != null) {
       hash ^= _unknownFields.GetHashCode();
     }
@@ -126,7 +125,7 @@ public sealed partial class WingBaseConfigDatas : pb::IMessage<WingBaseConfigDat
 
   [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
   public void WriteTo(pb::CodedOutputStream output) {
-    wingBase_.WriteTo(output, _repeated_wingBase_codec);
+    base_.WriteTo(output, _repeated_base_codec);
     if (_unknownFields != null) {
       _unknownFields.WriteTo(output);
     }
@@ -135,7 +134,7 @@ public sealed partial class WingBaseConfigDatas : pb::IMessage<WingBaseConfigDat
   [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
   public int CalculateSize() {
     int size = 0;
-    size += wingBase_.CalculateSize(_repeated_wingBase_codec);
+    size += base_.CalculateSize(_repeated_base_codec);
     if (_unknownFields != null) {
       size += _unknownFields.CalculateSize();
     }
@@ -147,7 +146,7 @@ public sealed partial class WingBaseConfigDatas : pb::IMessage<WingBaseConfigDat
     if (other == null) {
       return;
     }
-    wingBase_.Add(other.wingBase_);
+    base_.Add(other.base_);
     _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
   }
 
@@ -160,7 +159,7 @@ public sealed partial class WingBaseConfigDatas : pb::IMessage<WingBaseConfigDat
           _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
           break;
         case 10: {
-          wingBase_.AddEntriesFrom(input, _repeated_wingBase_codec);
+          base_.AddEntriesFrom(input, _repeated_base_codec);
           break;
         }
       }

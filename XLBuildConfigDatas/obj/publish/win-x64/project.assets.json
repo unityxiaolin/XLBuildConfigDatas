@@ -2,7 +2,7 @@
   "version": 3,
   "targets": {
     "net6.0": {
-      "Google.Protobuf/3.21.7": {
+      "Google.Protobuf/3.22.1": {
         "type": "package",
         "compile": {
           "lib/net5.0/Google.Protobuf.dll": {}
@@ -332,7 +332,7 @@
       }
     },
     "net6.0/win-x64": {
-      "Google.Protobuf/3.21.7": {
+      "Google.Protobuf/3.22.1": {
         "type": "package",
         "compile": {
           "lib/net5.0/Google.Protobuf.dll": {}
@@ -629,14 +629,14 @@
     }
   },
   "libraries": {
-    "Google.Protobuf/3.21.7": {
-      "sha512": "0Q+wYqtEVjRxVbtfxXzTUzwLGMZJKqhmIgdDpwWyg8J4ykYqfPn0M60FPBcZkjiGgtJqvZp+8t2van9rxTCLWQ==",
+    "Google.Protobuf/3.22.1": {
+      "sha512": "Ul4gVJWLya83Z8/n3+O4QKhD8ukCCwNLDyoWpUdJSnmzxRe8o3pWiuCzzvN2z/LVH60nozlKpTzhJo3ctI+G4Q==",
       "type": "package",
-      "path": "google.protobuf/3.21.7",
+      "path": "google.protobuf/3.22.1",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
-        "google.protobuf.3.21.7.nupkg.sha512",
+        "google.protobuf.3.22.1.nupkg.sha512",
         "google.protobuf.nuspec",
         "lib/net45/Google.Protobuf.dll",
         "lib/net45/Google.Protobuf.pdb",
@@ -1381,7 +1381,7 @@
   },
   "projectFileDependencyGroups": {
     "net6.0": [
-      "Google.Protobuf >= 3.21.7",
+      "Google.Protobuf >= 3.22.1",
       "Microsoft.CodeAnalysis.CSharp >= 4.3.1",
       "Spire.XLS >= 12.9.2"
     ]
@@ -1427,7 +1427,7 @@
         "dependencies": {
           "Google.Protobuf": {
             "target": "Package",
-            "version": "[3.21.7, )"
+            "version": "[3.22.1, )"
           },
           "Microsoft.CodeAnalysis.CSharp": {
             "target": "Package",

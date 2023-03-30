@@ -14,7 +14,7 @@ public static class ProtoTool
             return;
         }
         //Console.WriteLine($"即将生成proto文件的页签名称:{sheet.Name}");
-        string filePath = pathMgr.protoPath + sheet.Name + Utils.ConfigClassSuffix + ".proto";
+        string filePath = pathMgr.protoPath + Utils.GetClassName(sheet.Name) + ".proto";
         if (File.Exists(filePath))
         {
             File.Delete(filePath);
@@ -25,14 +25,14 @@ public static class ProtoTool
         writer.WriteLine("syntax = \"proto3\";");
         writer.WriteLine();
         //该类的数组
-        writer.WriteLine("message " + sheet.Name + Utils.ConfigClassesSuffix);
+        writer.WriteLine("message " + Utils.GetConfigClassesName(sheet.Name));
         writer.WriteLine("{");
-        string desc = $"//{sheet.Name}===>{sheet.Name}{Utils.ConfigClassSuffix}类的数组列表类";
-        writer.WriteLine($"\t{Utils.repeated} {sheet.Name}{Utils.ConfigClassSuffix} {sheet.Name}=1;{desc}");
+        string desc = $"//{Utils.ConfigBaseName}===>{Utils.GetClassName(sheet.Name)}类的数组列表类";
+        writer.WriteLine($"\t{Utils.repeated} {Utils.GetClassName(sheet.Name)} {Utils.ConfigBaseName}=1;{desc}");
         writer.WriteLine("}");
         writer.WriteLine();
 
-        writer.WriteLine("message " + sheet.Name + Utils.ConfigClassSuffix);
+        writer.WriteLine("message " + Utils.GetClassName(sheet.Name));
         writer.WriteLine("{");
         int excelColumn = 0;//表格中每行数据的列
         int clientColumn = 1;//proto文件中的下标从1开始往下递增
@@ -58,7 +58,7 @@ public static class ProtoTool
             List<CellRange> fiveRowCellRanges = sheet.Rows[4].CellList;
             string structTypeStr = twoRowCellRanges[excelColumn].DisplayedText;
             string memberTypeStr = threeRowCellRanges[excelColumn].DisplayedText;
-            string memberStr = fourRowCellRanges[excelColumn].DisplayedText;
+            string memberStr = Utils.ConvertToProtoName(fourRowCellRanges[excelColumn].DisplayedText);
             string memberDesc = fiveRowCellRanges[excelColumn].DisplayedText;
             desc = $"//{memberStr}===>{memberDesc}";
             if (structTypeStr == Utils.optional)//普通类型

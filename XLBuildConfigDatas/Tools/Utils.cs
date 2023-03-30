@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
+using System.Text.RegularExpressions;
 
 public static class Utils
 {
@@ -8,7 +9,9 @@ public static class Utils
     public static string repeated = "repeated";
     //proto生成类的后缀
     public static string ConfigClassSuffix = "Config";
-    public static string ConfigClassesSuffix = "ConfigDatas";
+    public static string ConfigClassesSuffix = "Datas";
+    //基础字段名
+    public static string ConfigBaseName = "Base";
     //数据类型
     public static string stringType = "string";
     //编译CS生成的dll名
@@ -16,6 +19,68 @@ public static class Utils
     //MD5校验文件的文件名
     public static string MD5CSVName = "MD5File";
     public static string MD5CSVFile = MD5CSVName + ".txt";
+
+    public static string GetClassName(string sheetName)
+    {
+        if(sheetName.EndsWith(ConfigClassSuffix))
+        {
+            return sheetName;
+        }
+        return sheetName + ConfigClassSuffix;
+    }
+
+    public static string GetConfigClassesName(string classesName)
+    {
+        if(classesName.EndsWith(ConfigClassSuffix))
+        {
+            return classesName + ConfigClassesSuffix;
+        }
+        else
+        {
+            return classesName + ConfigClassSuffix + ConfigClassesSuffix;
+        }
+    }
+
+    /// <summary>
+    /// 将字符串中的下划线去掉，并将单词首字母大写
+    /// </summary>
+    /// <param name="name"></param>
+    /// <returns></returns>
+    public static string ConvertToProtoName(string name)
+    {
+        // 将字符串中的下划线去掉，并将单词首字母大写
+        string[] words = Regex.Split(name, "_");
+        for (int i = 0; i < words.Length; i++)
+        {
+            words[i] = ConvertWordToProtoName(words[i]);
+        }
+        string convertedName = string.Join("", words);
+
+        //// 检查是否与protobuf的保留关键字冲突，如果冲突，则在末尾加上下划线
+        //if (FieldDescriptorProto.ReservedNames.Contains(convertedName))
+        //{
+        //    convertedName += "_";
+        //}
+
+        return convertedName;
+    }
+
+    private static string ConvertWordToProtoName(string word)
+    {
+        // 将单词首字母大写
+        word = char.ToUpper(word[0]) + word.Substring(1);
+
+        // 检查单词中的数字
+        for (int i = 1; i < word.Length; i++)
+        {
+            if (char.IsDigit(word[i - 1]) && !char.IsDigit(word[i]))
+            {
+                word = word.Substring(0, i) + char.ToUpper(word[i]) + word.Substring(i + 1);
+            }
+        }
+
+        return word;
+    }
 
     #region 通过proto代码生成C#代码
 

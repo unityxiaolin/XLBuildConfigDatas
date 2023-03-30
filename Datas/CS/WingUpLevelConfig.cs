@@ -22,20 +22,20 @@ public static partial class WingUpLevelConfigReflection {
   static WingUpLevelConfigReflection() {
     byte[] descriptorData = global::System.Convert.FromBase64String(
         string.Concat(
-          "ChdXaW5nVXBMZXZlbENvbmZpZy5wcm90byJBChZXaW5nVXBMZXZlbENvbmZp",
-          "Z0RhdGFzEicKC1dpbmdVcExldmVsGAEgAygLMhIuV2luZ1VwTGV2ZWxDb25m",
-          "aWcixQEKEVdpbmdVcExldmVsQ29uZmlnEg4KBldpbmdJZBgBIAEoBRIQCghG",
-          "aWdodGluZxgCIAEoBRIRCglJbWFnZU5hbWUYAyABKAkSJgoISXRlbUluZm8Y",
-          "BCADKAsyFC5XaW5nVXBMZXZlbEl0ZW1JbmZvEg0KBVBhcmFtGAUgAygFEhIK",
-          "CldpbmdOYW1lSWQYBiABKAUSHAoDQUFBGAcgAygLMg8uV2luZ1VwTGV2ZWxB",
-          "QUESEgoKSW50NjRWYWx1ZRgIIAEoAyI2ChNXaW5nVXBMZXZlbEl0ZW1JbmZv",
-          "Eg4KBkl0ZW1JZBgBIAEoDRIPCgdJdGVtTnVtGAIgASgNIkwKDldpbmdVcExl",
-          "dmVsQUFBEgoKAkExGAEgASgFEg4KBlVpbnRBMhgCIAEoDRIKCgJBMxgDIAEo",
-          "CRISCgpSZXBlYXRlZEE0GAQgAygJYgZwcm90bzM="));
+          "ChdXaW5nVXBMZXZlbENvbmZpZy5wcm90byI6ChZXaW5nVXBMZXZlbENvbmZp",
+          "Z0RhdGFzEiAKBEJhc2UYASADKAsyEi5XaW5nVXBMZXZlbENvbmZpZyLFAQoR",
+          "V2luZ1VwTGV2ZWxDb25maWcSDgoGV2luZ0lkGAEgASgFEhAKCEZpZ2h0aW5n",
+          "GAIgASgFEhEKCUltYWdlTmFtZRgDIAEoCRImCghJdGVtSW5mbxgEIAMoCzIU",
+          "LldpbmdVcExldmVsSXRlbUluZm8SDQoFUGFyYW0YBSADKAUSEgoKV2luZ05h",
+          "bWVJZBgGIAEoBRIcCgNBQUEYByADKAsyDy5XaW5nVXBMZXZlbEFBQRISCgpJ",
+          "bnQ2NFZhbHVlGAggASgDIjYKE1dpbmdVcExldmVsSXRlbUluZm8SDgoGSXRl",
+          "bUlkGAEgASgNEg8KB0l0ZW1OdW0YAiABKA0iTAoOV2luZ1VwTGV2ZWxBQUES",
+          "CgoCQTEYASABKAUSDgoGVWludEEyGAIgASgNEgoKAkEzGAMgASgJEhIKClJl",
+          "cGVhdGVkQTQYBCADKAliBnByb3RvMw=="));
     descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
         new pbr::FileDescriptor[] { },
         new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
-          new pbr::GeneratedClrTypeInfo(typeof(global::WingUpLevelConfigDatas), global::WingUpLevelConfigDatas.Parser, new[]{ "WingUpLevel" }, null, null, null, null),
+          new pbr::GeneratedClrTypeInfo(typeof(global::WingUpLevelConfigDatas), global::WingUpLevelConfigDatas.Parser, new[]{ "Base" }, null, null, null, null),
           new pbr::GeneratedClrTypeInfo(typeof(global::WingUpLevelConfig), global::WingUpLevelConfig.Parser, new[]{ "WingId", "Fighting", "ImageName", "ItemInfo", "Param", "WingNameId", "AAA", "Int64Value" }, null, null, null, null),
           new pbr::GeneratedClrTypeInfo(typeof(global::WingUpLevelItemInfo), global::WingUpLevelItemInfo.Parser, new[]{ "ItemId", "ItemNum" }, null, null, null, null),
           new pbr::GeneratedClrTypeInfo(typeof(global::WingUpLevelAAA), global::WingUpLevelAAA.Parser, new[]{ "A1", "UintA2", "A3", "RepeatedA4" }, null, null, null, null)
@@ -70,7 +70,7 @@ public sealed partial class WingUpLevelConfigDatas : pb::IMessage<WingUpLevelCon
 
   [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
   public WingUpLevelConfigDatas(WingUpLevelConfigDatas other) : this() {
-    wingUpLevel_ = other.wingUpLevel_.Clone();
+    base_ = other.base_.Clone();
     _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
   }
 
@@ -79,17 +79,17 @@ public sealed partial class WingUpLevelConfigDatas : pb::IMessage<WingUpLevelCon
     return new WingUpLevelConfigDatas(this);
   }
 
-  /// <summary>Field number for the "WingUpLevel" field.</summary>
-  public const int WingUpLevelFieldNumber = 1;
-  private static readonly pb::FieldCodec<global::WingUpLevelConfig> _repeated_wingUpLevel_codec
+  /// <summary>Field number for the "Base" field.</summary>
+  public const int BaseFieldNumber = 1;
+  private static readonly pb::FieldCodec<global::WingUpLevelConfig> _repeated_base_codec
       = pb::FieldCodec.ForMessage(10, global::WingUpLevelConfig.Parser);
-  private readonly pbc::RepeatedField<global::WingUpLevelConfig> wingUpLevel_ = new pbc::RepeatedField<global::WingUpLevelConfig>();
+  private readonly pbc::RepeatedField<global::WingUpLevelConfig> base_ = new pbc::RepeatedField<global::WingUpLevelConfig>();
   /// <summary>
-  ///WingUpLevel===>WingUpLevelConfig类的数组列表类
+  ///Base===>WingUpLevelConfig类的数组列表类
   /// </summary>
   [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  public pbc::RepeatedField<global::WingUpLevelConfig> WingUpLevel {
-    get { return wingUpLevel_; }
+  public pbc::RepeatedField<global::WingUpLevelConfig> Base {
+    get { return base_; }
   }
 
   [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -105,14 +105,14 @@ public sealed partial class WingUpLevelConfigDatas : pb::IMessage<WingUpLevelCon
     if (ReferenceEquals(other, this)) {
       return true;
     }
-    if(!wingUpLevel_.Equals(other.wingUpLevel_)) return false;
+    if(!base_.Equals(other.base_)) return false;
     return Equals(_unknownFields, other._unknownFields);
   }
 
   [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
   public override int GetHashCode() {
     int hash = 1;
-    hash ^= wingUpLevel_.GetHashCode();
+    hash ^= base_.GetHashCode();
     if (_unknownFields != null) {
       hash ^= _unknownFields.GetHashCode();
     }
@@ -126,7 +126,7 @@ public sealed partial class WingUpLevelConfigDatas : pb::IMessage<WingUpLevelCon
 
   [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
   public void WriteTo(pb::CodedOutputStream output) {
-    wingUpLevel_.WriteTo(output, _repeated_wingUpLevel_codec);
+    base_.WriteTo(output, _repeated_base_codec);
     if (_unknownFields != null) {
       _unknownFields.WriteTo(output);
     }
@@ -135,7 +135,7 @@ public sealed partial class WingUpLevelConfigDatas : pb::IMessage<WingUpLevelCon
   [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
   public int CalculateSize() {
     int size = 0;
-    size += wingUpLevel_.CalculateSize(_repeated_wingUpLevel_codec);
+    size += base_.CalculateSize(_repeated_base_codec);
     if (_unknownFields != null) {
       size += _unknownFields.CalculateSize();
     }
@@ -147,7 +147,7 @@ public sealed partial class WingUpLevelConfigDatas : pb::IMessage<WingUpLevelCon
     if (other == null) {
       return;
     }
-    wingUpLevel_.Add(other.wingUpLevel_);
+    base_.Add(other.base_);
     _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
   }
 
@@ -160,7 +160,7 @@ public sealed partial class WingUpLevelConfigDatas : pb::IMessage<WingUpLevelCon
           _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
           break;
         case 10: {
-          wingUpLevel_.AddEntriesFrom(input, _repeated_wingUpLevel_codec);
+          base_.AddEntriesFrom(input, _repeated_base_codec);
           break;
         }
       }

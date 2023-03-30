@@ -9,7 +9,7 @@
     ".NETCoreApp,Version=v6.0/win-x64": {
       "XLBuildConfigDatas/1.0.0": {
         "dependencies": {
-          "Google.Protobuf": "3.21.7",
+          "Google.Protobuf": "3.22.1",
           "Microsoft.CodeAnalysis.CSharp": "4.3.1",
           "Spire.XLS": "12.9.2",
           "runtimepack.Microsoft.NETCore.App.Runtime.win-x64": "6.0.4"
@@ -855,11 +855,11 @@
           }
         }
       },
-      "Google.Protobuf/3.21.7": {
+      "Google.Protobuf/3.22.1": {
         "runtime": {
           "lib/net5.0/Google.Protobuf.dll": {
-            "assemblyVersion": "3.21.7.0",
-            "fileVersion": "3.21.7.0"
+            "assemblyVersion": "3.22.1.0",
+            "fileVersion": "3.22.1.0"
           }
         }
       },
@@ -1062,12 +1062,12 @@
       "serviceable": false,
       "sha512": ""
     },
-    "Google.Protobuf/3.21.7": {
+    "Google.Protobuf/3.22.1": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-0Q+wYqtEVjRxVbtfxXzTUzwLGMZJKqhmIgdDpwWyg8J4ykYqfPn0M60FPBcZkjiGgtJqvZp+8t2van9rxTCLWQ==",
-      "path": "google.protobuf/3.21.7",
-      "hashPath": "google.protobuf.3.21.7.nupkg.sha512"
+      "sha512": "sha512-Ul4gVJWLya83Z8/n3+O4QKhD8ukCCwNLDyoWpUdJSnmzxRe8o3pWiuCzzvN2z/LVH60nozlKpTzhJo3ctI+G4Q==",
+      "path": "google.protobuf/3.22.1",
+      "hashPath": "google.protobuf.3.22.1.nupkg.sha512"
     },
     "Microsoft.CodeAnalysis.Analyzers/3.3.3": {
       "type": "package",

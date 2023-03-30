@@ -84,16 +84,16 @@ namespace Program
         {
             ////需要测试的，可以把TempCopyCSDir的cs文件拷贝到Program.cs的同级目录进行测试，
             ////或者将path.txt中的CopyCSToDir的路径改到Program.cs的同级目录下重新生成cs文件后测试
-            //string bytesFilePath = pathMgr.bytesPath + "WingBaseConfig.bytes";
-            //FileStream fileStream = File.OpenRead(bytesFilePath);
-            //WingBaseConfigDatas wingBaseConfigDatas = new WingBaseConfigDatas();
-            //wingBaseConfigDatas.MergeFrom(fileStream);
-            //List<WingBaseConfig> wingBaseConfigs = new List<WingBaseConfig>();
-            //for (int i = 0; i < wingBaseConfigDatas.WingBase.Count; i++)
-            //{
-            //    wingBaseConfigs.Add(wingBaseConfigDatas.WingBase[i]);
-            //}
-            //Console.WriteLine(wingBaseConfigs[1].WingId);
+            string bytesFilePath = pathMgr.bytesPath + "WingBaseConfig.bytes";
+            FileStream fileStream = File.OpenRead(bytesFilePath);
+            WingBaseConfigDatas wingBaseConfigDatas = new WingBaseConfigDatas();
+            wingBaseConfigDatas.MergeFrom(fileStream);
+            List<WingBaseConfig> wingBaseConfigs = new List<WingBaseConfig>();
+            for (int i = 0; i < wingBaseConfigDatas.Base.Count; i++)
+            {
+                wingBaseConfigs.Add(wingBaseConfigDatas.Base[i]);
+            }
+            Console.WriteLine(wingBaseConfigs[1].WingId);
         }
         #endregion
 
@@ -138,7 +138,7 @@ namespace Program
                         sheet.Dispose();
                         continue;
                     }
-                    string configKey = sheet.Name + "Config";
+                    string configKey = Utils.GetClassName(sheet.Name);
                     string sheetMD5 = MD5Tool.GetMD5BySheet(sheet);
                     //Console.WriteLine($"sheetName:{sheet.Name}  md5:{sheetMD5}");
                     if(m_md5Dic.ContainsKey(configKey))

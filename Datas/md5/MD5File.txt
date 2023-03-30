@@ -1,4 +1,0 @@
-======SheetName======,======MD5======
-WingBaseConfig,a21de93f7795d3360f90f288d68dd149
-WingUpLevelConfig,60ee21ea27bbd54f52f4f51c0857e84d
-WingUpStarConfig,0423c9b94690ec07207694aaf8136d3a

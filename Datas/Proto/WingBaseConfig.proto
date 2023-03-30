@@ -2,7 +2,7 @@ syntax = "proto3";
 
 message WingBaseConfigDatas
 {
-	repeated WingBaseConfig WingBase=1;//WingBase===>WingBaseConfig类的数组列表类
+	repeated WingBaseConfig Base=1;//Base===>WingBaseConfig类的数组列表类
 }
 
 message WingBaseConfig

@@ -2,7 +2,7 @@ syntax = "proto3";
 
 message WingUpStarConfigDatas
 {
-	repeated WingUpStarConfig WingUpStar=1;//WingUpStar===>WingUpStarConfig类的数组列表类
+	repeated WingUpStarConfig Base=1;//Base===>WingUpStarConfig类的数组列表类
 }
 
 message WingUpStarConfig

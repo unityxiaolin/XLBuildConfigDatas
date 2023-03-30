@@ -39,6 +39,7 @@ public static class CSCompilerTool
         {
             MetadataReference.CreateFromFile(typeof(object).Assembly.Location),
             MetadataReference.CreateFromFile(Assembly.Load("Google.Protobuf").Location),
+            MetadataReference.CreateFromFile(Assembly.Load("System.Collections, Version=5.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a").Location),
             MetadataReference.CreateFromFile(Assembly.Load("System.Runtime, Version=5.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a").Location),
         };
         SyntaxTree syntaxtree = CSharpSyntaxTree.ParseText(sourceCodeText, new CSharpParseOptions(LanguageVersion.Latest));
@@ -48,7 +49,7 @@ public static class CSCompilerTool
             .WithOptions(new CSharpCompilationOptions(OutputKind.DynamicallyLinkedLibrary))//输出为 dll 程序集
             .AddReferences(systemReference)//添加程序集引用
             .AddSyntaxTrees(syntaxtree);// 添加上面代码分析得到的语法树
-        string assemblyPath = $"{ assemblyName}.dll";
+        string assemblyPath = $"{assemblyName}.dll";
         var compilationResult = compilation.Emit(assemblyPath);
         if(compilationResult.Success)
         {
@@ -57,7 +58,12 @@ public static class CSCompilerTool
         }
         else
         {
+            // 如果编译失败，则输出诊断消息
             Console.Error.WriteLine("!!! Compiler C# file error, please check.");
+            foreach (var diagnostic in compilationResult.Diagnostics)
+            {
+                Console.WriteLine(diagnostic.ToString());
+            }
         }
         //Console.WriteLine("编译完成");
     }

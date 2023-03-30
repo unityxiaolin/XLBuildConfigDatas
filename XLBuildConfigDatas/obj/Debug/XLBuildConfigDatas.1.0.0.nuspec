@@ -7,7 +7,7 @@
     <description>Package Description</description>
     <dependencies>
       <group targetFramework="net6.0">
-        <dependency id="Google.Protobuf" version="3.21.7" exclude="Build,Analyzers" />
+        <dependency id="Google.Protobuf" version="3.22.1" exclude="Build,Analyzers" />
         <dependency id="Microsoft.CodeAnalysis.CSharp" version="4.3.1" exclude="Build,Analyzers" />
         <dependency id="Spire.XLS" version="12.9.2" exclude="Build,Analyzers" />
       </group>

@@ -2,7 +2,7 @@
 
 public static class pathMgr
 {
-    public static string rootPath = "..\\..\\..\\..\\";  //"..\\";  //"..\\..\\..\\..\\";
+    public static string rootPath = "..\\..\\..\\..\\";   //"..\\";  //"..\\..\\..\\..\\";  发布的时候改这个路径，并且把XLBuildConfigDatas中的Tools路径的东西也一并复制过去。
     public static string configsPath = "";
     public static string csPath = "";
     public static string csDir = "";

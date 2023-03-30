@@ -13,6 +13,7 @@ public static class CSTool
     }
     public static void GenerateBytesFile(string csName, Worksheet sheet)
     {
+        Console.WriteLine("开始生成bytes文件：" + csName);
         if (sheet.Rows.Count() <= 0 || sheet.Columns.Count() <= 0)
         {
             Console.WriteLine($"{sheet.Name}中的数据为空，请检查.");
@@ -26,14 +27,14 @@ public static class CSTool
             return;
         }
         //类的数组
-        Type? classesType = CSFileAssembly?.GetType(sheet.Name+Utils.ConfigClassesSuffix);
+        Type? classesType = CSFileAssembly?.GetType(Utils.GetConfigClassesName(sheet.Name));
         if(classesType == null)
         {
-            Console.Error.WriteLine("!!! classesType is null, please check, class name:" + sheet.Name + Utils.ConfigClassesSuffix);
+            Console.Error.WriteLine("!!! classesType is null, please check, class name:" + Utils.GetConfigClassesName(sheet.Name));
             return;
         }
         IMessage? classesInstance = Activator.CreateInstance(classesType) as IMessage;
-        PropertyInfo? classesPropertyInfo = classesType.GetProperty(sheet.Name);
+        PropertyInfo? classesPropertyInfo = classesType.GetProperty(Utils.ConfigBaseName);
         IList classesRepeatedFiled = (IList)classesPropertyInfo.GetValue(classesInstance);
 
         int classCount = sheet.Columns[0].CellList.Count - CommonDataMgr.ConfigFrontLineCount;//类的个数
@@ -84,8 +85,8 @@ public static class CSTool
             List<CellRange> fourRowCellRanges = sheet.Rows[3].CellList;
             string structTypeStr = twoRowCellRanges[excelColumn].DisplayedText;
             string memberTypeStr = threeRowCellRanges[excelColumn].DisplayedText;
-            string memberStr = fourRowCellRanges[excelColumn].DisplayedText;
-
+            string memberStr = Utils.ConvertToProtoName(fourRowCellRanges[excelColumn].DisplayedText);
+            //Console.WriteLine("处理列数excelColumn：" + excelColumn+ "   memberStr:"+ memberStr);
             columnList = sheet.Columns[excelColumn].CellList;//某一列的数据
             for (int i = CommonDataMgr.ConfigFrontLineCount; i < columnList.Count; i++)//遍历
             {
@@ -107,42 +108,45 @@ public static class CSTool
                     else if (structTypeStr == Utils.repeated)//数组类型
                     {
                         string[] arrayValue = columnList[i].DisplayedText.Split(";");
-                        Type? type = propertyInfo.PropertyType.GetGenericArguments()[0];//该数组的类型
-                        //Console.WriteLine("type name:" + type.Name + "           propertyInfo.PropertyType:" + propertyInfo.PropertyType);
-                        IList repeatedFiled = (IList)propertyInfo.GetValue(currentClass);
-                        if (type.Name.ToLower() == Utils.stringType)//字符串类型
+                        if((arrayValue.Length==1 && !string.IsNullOrEmpty(arrayValue[0]) || arrayValue.Length > 1))
                         {
-                            for (int j = 0; j < arrayValue.Length; j++)
+                            Type? type = propertyInfo.PropertyType.GetGenericArguments()[0];//该数组的类型
+                                                                                            //Console.WriteLine("type name:" + type.Name + "           propertyInfo.PropertyType:" + propertyInfo.PropertyType);
+                            IList repeatedFiled = (IList)propertyInfo.GetValue(currentClass);
+                            if (type.Name.ToLower() == Utils.stringType)//字符串类型
                             {
-                                repeatedFiled.Add(arrayValue[j]);
+                                for (int j = 0; j < arrayValue.Length; j++)
+                                {
+                                    repeatedFiled.Add(arrayValue[j] ?? "");
+                                }
                             }
-                        }
-                        else//其他类型
-                        {
-                            if (type == null)
+                            else//其他类型
                             {
-                                Console.Error.WriteLine($"array type error,please check,config:{sheet.Name} memberTypeStr:{memberTypeStr}");
-                                return;
-                            }
-                            Type[] types = new Type[1];
-                            types[0] = typeof(string);
-                            MethodInfo? memberTypeInfo = type.GetMethod("Parse", types);
-                            if (memberTypeInfo == null)
-                            {
-                                Console.Error.WriteLine($"MethodInfo is null, {memberTypeStr} do not have Parse property，please check，config:{sheet.Name}");
-                                return;
-                            }
-                            object[] arrayTypeValues = new object[arrayValue.Length];//对应的类型的数组值
-                            for (int j = 0; j < arrayValue.Length; j++)
-                            {
-                                string[] strings = new string[1];
-                                strings[0] = arrayValue[j];
-                                arrayTypeValues[j] = memberTypeInfo?.Invoke(null, strings);
-                            }
-                            //Console.WriteLine("数组字段的类型:" + propertyInfo.PropertyType.Name);
-                            for (int j = 0; j < arrayTypeValues.Length; j++)
-                            {
-                                repeatedFiled.Add(arrayTypeValues[j]);
+                                if (type == null)
+                                {
+                                    Console.Error.WriteLine($"array type error,please check,config:{sheet.Name} memberTypeStr:{memberTypeStr}");
+                                    return;
+                                }
+                                Type[] types = new Type[1];
+                                types[0] = typeof(string);
+                                MethodInfo? memberTypeInfo = type.GetMethod("Parse", types);
+                                if (memberTypeInfo == null)
+                                {
+                                    Console.Error.WriteLine($"MethodInfo is null, {memberTypeStr} do not have Parse property，please check，config:{sheet.Name}");
+                                    return;
+                                }
+                                object[] arrayTypeValues = new object[arrayValue.Length];//对应的类型的数组值
+                                for (int j = 0; j < arrayValue.Length; j++)
+                                {
+                                    string[] strings = new string[1];
+                                    strings[0] = arrayValue[j];
+                                    arrayTypeValues[j] = memberTypeInfo?.Invoke(null, strings);
+                                }
+                                //Console.WriteLine("数组字段的类型:" + propertyInfo.PropertyType.Name);
+                                for (int j = 0; j < arrayTypeValues.Length; j++)
+                                {
+                                    repeatedFiled.Add(arrayTypeValues[j]);
+                                }
                             }
                         }
                     }
@@ -265,6 +269,7 @@ public static class CSTool
         //赋值完成，开始序列化
         ProtobufSerializeTool.SerializeCSToFile(classesInstance, csName);
     }
+
 
     /// <summary>
     /// 给字段赋值，会自动根据该字段的类型来赋予对应的值

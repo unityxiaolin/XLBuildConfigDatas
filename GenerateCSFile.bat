@@ -14,7 +14,7 @@ del %CSGenPath%\*.* /f /s /q
 ::遍历所有文件
 for /f "delims=" %%i in ('dir /b "%protoFilePath%\*.proto"') do (
 	::echo %protoc% -i:%protoFilePath%\%%i -o:%CSGenPath%\%%~ni.cs
-	%protoc% %protoFilePath%\%%i --csharp_out=%CSGenPath%
+	%protoc% %protoFilePath%\%%i --csharp_out=%CSGenPath% --preserve-field-names
 )
 echo Generate CS File Success!
 pause

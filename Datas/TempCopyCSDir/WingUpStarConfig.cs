@@ -22,20 +22,20 @@ public static partial class WingUpStarConfigReflection {
   static WingUpStarConfigReflection() {
     byte[] descriptorData = global::System.Convert.FromBase64String(
         string.Concat(
-          "ChZXaW5nVXBTdGFyQ29uZmlnLnByb3RvIj4KFVdpbmdVcFN0YXJDb25maWdE",
-          "YXRhcxIlCgpXaW5nVXBTdGFyGAEgAygLMhEuV2luZ1VwU3RhckNvbmZpZyLC",
-          "AQoQV2luZ1VwU3RhckNvbmZpZxIOCgZXaW5nSWQYASABKAUSEAoIRmlnaHRp",
-          "bmcYAiABKAUSEQoJSW1hZ2VOYW1lGAMgASgJEiUKCEl0ZW1JbmZvGAQgAygL",
-          "MhMuV2luZ1VwU3Rhckl0ZW1JbmZvEg0KBVBhcmFtGAUgAygFEhIKCldpbmdO",
-          "YW1lSWQYBiABKAUSGwoDQUFBGAcgAygLMg4uV2luZ1VwU3RhckFBQRISCgpJ",
-          "bnQ2NFZhbHVlGAggASgDIjUKEldpbmdVcFN0YXJJdGVtSW5mbxIOCgZJdGVt",
-          "SWQYASABKA0SDwoHSXRlbU51bRgCIAEoDSJLCg1XaW5nVXBTdGFyQUFBEgoK",
-          "AkExGAEgASgFEg4KBlVpbnRBMhgCIAEoDRIKCgJBMxgDIAEoCRISCgpSZXBl",
-          "YXRlZEE0GAQgAygJYgZwcm90bzM="));
+          "ChZXaW5nVXBTdGFyQ29uZmlnLnByb3RvIjgKFVdpbmdVcFN0YXJDb25maWdE",
+          "YXRhcxIfCgRCYXNlGAEgAygLMhEuV2luZ1VwU3RhckNvbmZpZyLCAQoQV2lu",
+          "Z1VwU3RhckNvbmZpZxIOCgZXaW5nSWQYASABKAUSEAoIRmlnaHRpbmcYAiAB",
+          "KAUSEQoJSW1hZ2VOYW1lGAMgASgJEiUKCEl0ZW1JbmZvGAQgAygLMhMuV2lu",
+          "Z1VwU3Rhckl0ZW1JbmZvEg0KBVBhcmFtGAUgAygFEhIKCldpbmdOYW1lSWQY",
+          "BiABKAUSGwoDQUFBGAcgAygLMg4uV2luZ1VwU3RhckFBQRISCgpJbnQ2NFZh",
+          "bHVlGAggASgDIjUKEldpbmdVcFN0YXJJdGVtSW5mbxIOCgZJdGVtSWQYASAB",
+          "KA0SDwoHSXRlbU51bRgCIAEoDSJLCg1XaW5nVXBTdGFyQUFBEgoKAkExGAEg",
+          "ASgFEg4KBlVpbnRBMhgCIAEoDRIKCgJBMxgDIAEoCRISCgpSZXBlYXRlZEE0",
+          "GAQgAygJYgZwcm90bzM="));
     descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
         new pbr::FileDescriptor[] { },
         new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
-          new pbr::GeneratedClrTypeInfo(typeof(global::WingUpStarConfigDatas), global::WingUpStarConfigDatas.Parser, new[]{ "WingUpStar" }, null, null, null, null),
+          new pbr::GeneratedClrTypeInfo(typeof(global::WingUpStarConfigDatas), global::WingUpStarConfigDatas.Parser, new[]{ "Base" }, null, null, null, null),
           new pbr::GeneratedClrTypeInfo(typeof(global::WingUpStarConfig), global::WingUpStarConfig.Parser, new[]{ "WingId", "Fighting", "ImageName", "ItemInfo", "Param", "WingNameId", "AAA", "Int64Value" }, null, null, null, null),
           new pbr::GeneratedClrTypeInfo(typeof(global::WingUpStarItemInfo), global::WingUpStarItemInfo.Parser, new[]{ "ItemId", "ItemNum" }, null, null, null, null),
           new pbr::GeneratedClrTypeInfo(typeof(global::WingUpStarAAA), global::WingUpStarAAA.Parser, new[]{ "A1", "UintA2", "A3", "RepeatedA4" }, null, null, null, null)
@@ -70,7 +70,7 @@ public sealed partial class WingUpStarConfigDatas : pb::IMessage<WingUpStarConfi
 
   [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
   public WingUpStarConfigDatas(WingUpStarConfigDatas other) : this() {
-    wingUpStar_ = other.wingUpStar_.Clone();
+    base_ = other.base_.Clone();
     _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
   }
 
@@ -79,17 +79,17 @@ public sealed partial class WingUpStarConfigDatas : pb::IMessage<WingUpStarConfi
     return new WingUpStarConfigDatas(this);
   }
 
-  /// <summary>Field number for the "WingUpStar" field.</summary>
-  public const int WingUpStarFieldNumber = 1;
-  private static readonly pb::FieldCodec<global::WingUpStarConfig> _repeated_wingUpStar_codec
+  /// <summary>Field number for the "Base" field.</summary>
+  public const int BaseFieldNumber = 1;
+  private static readonly pb::FieldCodec<global::WingUpStarConfig> _repeated_base_codec
       = pb::FieldCodec.ForMessage(10, global::WingUpStarConfig.Parser);
-  private readonly pbc::RepeatedField<global::WingUpStarConfig> wingUpStar_ = new pbc::RepeatedField<global::WingUpStarConfig>();
+  private readonly pbc::RepeatedField<global::WingUpStarConfig> base_ = new pbc::RepeatedField<global::WingUpStarConfig>();
   /// <summary>
-  ///WingUpStar===>WingUpStarConfig类的数组列表类
+  ///Base===>WingUpStarConfig类的数组列表类
   /// </summary>
   [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-  public pbc::RepeatedField<global::WingUpStarConfig> WingUpStar {
-    get { return wingUpStar_; }
+  public pbc::RepeatedField<global::WingUpStarConfig> Base {
+    get { return base_; }
   }
 
   [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -105,14 +105,14 @@ public sealed partial class WingUpStarConfigDatas : pb::IMessage<WingUpStarConfi
     if (ReferenceEquals(other, this)) {
       return true;
     }
-    if(!wingUpStar_.Equals(other.wingUpStar_)) return false;
+    if(!base_.Equals(other.base_)) return false;
     return Equals(_unknownFields, other._unknownFields);
   }
 
   [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
   public override int GetHashCode() {
     int hash = 1;
-    hash ^= wingUpStar_.GetHashCode();
+    hash ^= base_.GetHashCode();
     if (_unknownFields != null) {
       hash ^= _unknownFields.GetHashCode();
     }
@@ -126,7 +126,7 @@ public sealed partial class WingUpStarConfigDatas : pb::IMessage<WingUpStarConfi
 
   [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
   public void WriteTo(pb::CodedOutputStream output) {
-    wingUpStar_.WriteTo(output, _repeated_wingUpStar_codec);
+    base_.WriteTo(output, _repeated_base_codec);
     if (_unknownFields != null) {
       _unknownFields.WriteTo(output);
     }
@@ -135,7 +135,7 @@ public sealed partial class WingUpStarConfigDatas : pb::IMessage<WingUpStarConfi
   [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
   public int CalculateSize() {
     int size = 0;
-    size += wingUpStar_.CalculateSize(_repeated_wingUpStar_codec);
+    size += base_.CalculateSize(_repeated_base_codec);
     if (_unknownFields != null) {
       size += _unknownFields.CalculateSize();
     }
@@ -147,7 +147,7 @@ public sealed partial class WingUpStarConfigDatas : pb::IMessage<WingUpStarConfi
     if (other == null) {
       return;
     }
-    wingUpStar_.Add(other.wingUpStar_);
+    base_.Add(other.base_);
     _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
   }
 
@@ -160,7 +160,7 @@ public sealed partial class WingUpStarConfigDatas : pb::IMessage<WingUpStarConfi
           _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
           break;
         case 10: {
-          wingUpStar_.AddEntriesFrom(input, _repeated_wingUpStar_codec);
+          base_.AddEntriesFrom(input, _repeated_base_codec);
           break;
         }
       }
