@@ -1,0 +1,18 @@
+{
+  "version": 2,
+  "dgSpecHash": "hU0ISB+ClS3nyRZDgt4ssBuwN5/uRAgIUF50hbb0gXSArUI1QXefpaFgKAIO0UYBl1pAMw6G1+kdj6BhDvLYUQ==",
+  "success": true,
+  "projectFilePath": "I:\\X2Game\\X2Config\\TranslationTool\\TranslationTool\\TranslationTool.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\dmlt\\.nuget\\packages\\microsoft.win32.systemevents\\6.0.0\\microsoft.win32.systemevents.6.0.0.nupkg.sha512",
+    "C:\\Users\\dmlt\\.nuget\\packages\\spire.xls\\13.8.0\\spire.xls.13.8.0.nupkg.sha512",
+    "C:\\Users\\dmlt\\.nuget\\packages\\system.drawing.common\\6.0.0\\system.drawing.common.6.0.0.nupkg.sha512",
+    "C:\\Users\\dmlt\\.nuget\\packages\\system.formats.asn1\\6.0.0\\system.formats.asn1.6.0.0.nupkg.sha512",
+    "C:\\Users\\dmlt\\.nuget\\packages\\system.runtime.compilerservices.unsafe\\6.0.0\\system.runtime.compilerservices.unsafe.6.0.0.nupkg.sha512",
+    "C:\\Users\\dmlt\\.nuget\\packages\\system.security.accesscontrol\\6.0.0\\system.security.accesscontrol.6.0.0.nupkg.sha512",
+    "C:\\Users\\dmlt\\.nuget\\packages\\system.security.cryptography.pkcs\\6.0.0\\system.security.cryptography.pkcs.6.0.0.nupkg.sha512",
+    "C:\\Users\\dmlt\\.nuget\\packages\\system.security.cryptography.xml\\6.0.0\\system.security.cryptography.xml.6.0.0.nupkg.sha512",
+    "C:\\Users\\dmlt\\.nuget\\packages\\system.text.encoding.codepages\\6.0.0\\system.text.encoding.codepages.6.0.0.nupkg.sha512"
+  ],
+  "logs": []
+}
