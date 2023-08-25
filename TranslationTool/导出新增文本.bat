@@ -1,4 +1,4 @@
 @echo off
-cd ./TranslationTool\bin\Debug\net6.0
+cd .\ReleaseTranslationTool\TranslationTool\TranslationTool\TranslationTool
 TranslationTool.exe 1
 pause

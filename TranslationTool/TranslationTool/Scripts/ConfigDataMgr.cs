@@ -6,9 +6,11 @@ using System.Threading.Tasks;
 
 public static class ConfigDataMgr
 {
+    public static string RootPath= "../../../../";
     private const string ConfigPath = "../../../../Config/";
     public static List<string> TextConfigPathList;//线上文本表路径
     public static string TranslationConfigPath;//翻译给回来的翻译表路径
+    public static string LastCompareConfigPath;//上次的对比表路径
     public static List<string> NoDoSheetList;//不处理的文本表中的页签名
 
     public static string DayDateTime;
@@ -67,6 +69,10 @@ public static class ConfigDataMgr
             else if (lineArray[0].Equals("翻译给回来的翻译表名"))
             {
                 TranslationConfigPath = ConfigPath + lineArray[1].Trim();
+            }
+            else if (lineArray[0].Equals("上次的对比表"))
+            {
+                LastCompareConfigPath = ConfigPath + lineArray[1].Trim();
             }
             else if (lineArray[0].Equals("不处理的文本表中的页签名"))
             {

@@ -35,12 +35,12 @@ class LogMgr
 
     public static void AddTextLog(string str)
     {
-        m_textLog.Append("\n" + str);
+        m_textLog.Append(DateTime.Now.ToString("yyyyMMddHHmmss") + "\n" + str);
     }
 
     public static void SaveTextLog()
     {
-        FileStream fs = new FileStream("TranslationLog.txt", FileMode.Create);
+        FileStream fs = new FileStream(ConfigDataMgr.RootPath+"TranslationLog.txt", FileMode.Create);
         byte[] data = System.Text.Encoding.UTF8.GetBytes(m_textLog.ToString());
         fs.Write(data, 0, data.Length);
         fs.Flush();

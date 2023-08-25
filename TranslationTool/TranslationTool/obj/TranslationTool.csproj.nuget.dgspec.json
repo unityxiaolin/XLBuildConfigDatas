@@ -40,9 +40,9 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "dependencies": {
-            "Spire.XLS": {
+            "FreeSpire.XLS": {
               "target": "Package",
-              "version": "[13.8.0, )"
+              "version": "[12.7.0, )"
             }
           },
           "imports": [

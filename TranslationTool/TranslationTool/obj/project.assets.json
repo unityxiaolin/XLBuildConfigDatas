@@ -2,6 +2,22 @@
   "version": 3,
   "targets": {
     "net6.0": {
+      "FreeSpire.XLS/12.7.0": {
+        "type": "package",
+        "dependencies": {
+          "System.Drawing.Common": "6.0.0",
+          "System.Security.Cryptography.Xml": "6.0.0",
+          "System.Text.Encoding.CodePages": "6.0.0"
+        },
+        "compile": {
+          "lib/net6.0/Spire.Pdf.dll": {},
+          "lib/net6.0/Spire.XLS.dll": {}
+        },
+        "runtime": {
+          "lib/net6.0/Spire.Pdf.dll": {},
+          "lib/net6.0/Spire.XLS.dll": {}
+        }
+      },
       "Microsoft.Win32.SystemEvents/6.0.0": {
         "type": "package",
         "compile": {
@@ -18,22 +34,6 @@
             "assetType": "runtime",
             "rid": "win"
           }
-        }
-      },
-      "Spire.XLS/13.8.0": {
-        "type": "package",
-        "dependencies": {
-          "System.Drawing.Common": "6.0.0",
-          "System.Security.Cryptography.Xml": "6.0.0",
-          "System.Text.Encoding.CodePages": "6.0.0"
-        },
-        "compile": {
-          "lib/net6.0/Spire.Pdf.dll": {},
-          "lib/net6.0/Spire.XLS.dll": {}
-        },
-        "runtime": {
-          "lib/net6.0/Spire.Pdf.dll": {},
-          "lib/net6.0/Spire.XLS.dll": {}
         }
       },
       "System.Drawing.Common/6.0.0": {
@@ -164,6 +164,38 @@
     }
   },
   "libraries": {
+    "FreeSpire.XLS/12.7.0": {
+      "sha512": "3WgGfpfgPtPIU/TGYdCjnTsXHMgGce4xsP3LP0Napab8jBXwLyBHoPsomTgEin71qZ5JHrC4KWn+tyvonIlk2w==",
+      "type": "package",
+      "path": "freespire.xls/12.7.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "freespire.xls.12.7.0.nupkg.sha512",
+        "freespire.xls.nuspec",
+        "lib/MonoAndroid/Spire.Pdf.dll",
+        "lib/MonoAndroid/Spire.Pdf.xml",
+        "lib/MonoAndroid/Spire.XLS.dll",
+        "lib/MonoAndroid/Spire.XLS.xml",
+        "lib/net40/Spire.Pdf.dll",
+        "lib/net40/Spire.Pdf.xml",
+        "lib/net40/Spire.XLS.dll",
+        "lib/net40/Spire.XLS.xml",
+        "lib/net6.0/Spire.Pdf.dll",
+        "lib/net6.0/Spire.Pdf.xml",
+        "lib/net6.0/Spire.XLS.dll",
+        "lib/net6.0/Spire.XLS.xml",
+        "lib/netcoreapp2.0/Spire.Pdf.dll",
+        "lib/netcoreapp2.0/Spire.Pdf.xml",
+        "lib/netcoreapp2.0/Spire.XLS.dll",
+        "lib/netcoreapp2.0/Spire.XLS.xml",
+        "lib/xamarinios/Spire.Pdf.dll",
+        "lib/xamarinios/Spire.Pdf.xml",
+        "lib/xamarinios/Spire.XLS.dll",
+        "lib/xamarinios/Spire.XLS.xml",
+        "license.txt"
+      ]
+    },
     "Microsoft.Win32.SystemEvents/6.0.0": {
       "sha512": "hqTM5628jSsQiv+HGpiq3WKBl2c8v1KZfby2J6Pr7pEPlK9waPdgEO6b8A/+/xn/yZ9ulv8HuqK71ONy2tg67A==",
       "type": "package",
@@ -191,38 +223,6 @@
         "runtimes/win/lib/netcoreapp3.1/Microsoft.Win32.SystemEvents.dll",
         "runtimes/win/lib/netcoreapp3.1/Microsoft.Win32.SystemEvents.xml",
         "useSharedDesignerContext.txt"
-      ]
-    },
-    "Spire.XLS/13.8.0": {
-      "sha512": "rmQ0ppo9rmKeHU0IaAKc3F1mGLyWyxhQ9tV3WUrz7QYIAH5oTw4boygrDZFQpE2hFU1enLBrSeLIvKTJnrDoeg==",
-      "type": "package",
-      "path": "spire.xls/13.8.0",
-      "files": [
-        ".nupkg.metadata",
-        ".signature.p7s",
-        "lib/MonoAndroid/Spire.Pdf.dll",
-        "lib/MonoAndroid/Spire.Pdf.xml",
-        "lib/MonoAndroid/Spire.XLS.dll",
-        "lib/MonoAndroid/Spire.XLS.xml",
-        "lib/net40/Spire.Pdf.dll",
-        "lib/net40/Spire.Pdf.xml",
-        "lib/net40/Spire.XLS.XML",
-        "lib/net40/Spire.XLS.dll",
-        "lib/net6.0/Spire.Pdf.dll",
-        "lib/net6.0/Spire.Pdf.xml",
-        "lib/net6.0/Spire.XLS.dll",
-        "lib/net6.0/Spire.XLS.xml",
-        "lib/netcoreapp2.0/Spire.Pdf.dll",
-        "lib/netcoreapp2.0/Spire.Pdf.xml",
-        "lib/netcoreapp2.0/Spire.XLS.dll",
-        "lib/netcoreapp2.0/Spire.XLS.xml",
-        "lib/xamarinios/Spire.Pdf.dll",
-        "lib/xamarinios/Spire.Pdf.xml",
-        "lib/xamarinios/Spire.XLS.dll",
-        "lib/xamarinios/Spire.XLS.xml",
-        "license.txt",
-        "spire.xls.13.8.0.nupkg.sha512",
-        "spire.xls.nuspec"
       ]
     },
     "System.Drawing.Common/6.0.0": {
@@ -445,7 +445,7 @@
   },
   "projectFileDependencyGroups": {
     "net6.0": [
-      "Spire.XLS >= 13.8.0"
+      "FreeSpire.XLS >= 12.7.0"
     ]
   },
   "packageFolders": {
@@ -487,9 +487,9 @@
       "net6.0": {
         "targetAlias": "net6.0",
         "dependencies": {
-          "Spire.XLS": {
+          "FreeSpire.XLS": {
             "target": "Package",
-            "version": "[13.8.0, )"
+            "version": "[12.7.0, )"
           }
         },
         "imports": [

@@ -1,0 +1,21 @@
+{
+  "version": 2,
+  "dgSpecHash": "YIsqP/JChpWSW+WSP5qpG9i/KmeSuPH9vBO0DdhkQhRsz1t3p1q9IWGdBYaaEeFFP0uucBvcUQJ7SAn2Sdaodw==",
+  "success": true,
+  "projectFilePath": "I:\\X2Game\\X2Config\\TranslationTool\\TranslationTool\\TranslationTool.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\dmlt\\.nuget\\packages\\freespire.xls\\12.7.0\\freespire.xls.12.7.0.nupkg.sha512",
+    "C:\\Users\\dmlt\\.nuget\\packages\\microsoft.win32.systemevents\\6.0.0\\microsoft.win32.systemevents.6.0.0.nupkg.sha512",
+    "C:\\Users\\dmlt\\.nuget\\packages\\system.drawing.common\\6.0.0\\system.drawing.common.6.0.0.nupkg.sha512",
+    "C:\\Users\\dmlt\\.nuget\\packages\\system.formats.asn1\\6.0.0\\system.formats.asn1.6.0.0.nupkg.sha512",
+    "C:\\Users\\dmlt\\.nuget\\packages\\system.runtime.compilerservices.unsafe\\6.0.0\\system.runtime.compilerservices.unsafe.6.0.0.nupkg.sha512",
+    "C:\\Users\\dmlt\\.nuget\\packages\\system.security.accesscontrol\\6.0.0\\system.security.accesscontrol.6.0.0.nupkg.sha512",
+    "C:\\Users\\dmlt\\.nuget\\packages\\system.security.cryptography.pkcs\\6.0.0\\system.security.cryptography.pkcs.6.0.0.nupkg.sha512",
+    "C:\\Users\\dmlt\\.nuget\\packages\\system.security.cryptography.xml\\6.0.0\\system.security.cryptography.xml.6.0.0.nupkg.sha512",
+    "C:\\Users\\dmlt\\.nuget\\packages\\system.text.encoding.codepages\\6.0.0\\system.text.encoding.codepages.6.0.0.nupkg.sha512",
+    "C:\\Users\\dmlt\\.nuget\\packages\\microsoft.netcore.app.runtime.win-x86\\6.0.4\\microsoft.netcore.app.runtime.win-x86.6.0.4.nupkg.sha512",
+    "C:\\Users\\dmlt\\.nuget\\packages\\microsoft.windowsdesktop.app.runtime.win-x86\\6.0.4\\microsoft.windowsdesktop.app.runtime.win-x86.6.0.4.nupkg.sha512",
+    "C:\\Users\\dmlt\\.nuget\\packages\\microsoft.aspnetcore.app.runtime.win-x86\\6.0.4\\microsoft.aspnetcore.app.runtime.win-x86.6.0.4.nupkg.sha512"
+  ],
+  "logs": []
+}

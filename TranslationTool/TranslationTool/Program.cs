@@ -3,11 +3,6 @@ using System;
 using Spire.Xls;
 namespace Program
 {
-    /// <summary>
-    /// 存在问题
-    /// 1：读取线上表格数据的时候比较慢
-    /// 2：新建的xlsx表格读取不到
-    /// </summary>
     class Program
     {
         static void Main(string[] args)
@@ -15,11 +10,15 @@ namespace Program
             Console.WriteLine("===开始处理===");
             LogMgr.InitLog();
             ConfigDataMgr.Init();
-
+            if(args.Length<=0)
+            {
+                args = new string[] { "1" };
+            }
+            
             switch (args[0])
             {
                 case "1"://导出新增文本
-                    InitTranslationInfo();
+                    InitLastCompareInfo();
                     InitTextConfigInfo();
                     CompareWriteToExcel();
                     ExportNewAddTextConfig();
@@ -32,6 +31,7 @@ namespace Program
                     break;
                 case "3"://导出新增文本,并将翻译文本对比后写入线上文本表
                     InitTranslationInfo();
+                    InitLastCompareInfo();
                     InitTextConfigInfo();
                     CompareWriteToExcel();
                     ExportNewAddTextConfig();
@@ -41,7 +41,6 @@ namespace Program
                     Console.WriteLine("参数错误，无法处理表格");
                     break;
             }
-            //GenerateCompareConfig();
 
             Console.WriteLine("===处理完成===");
             Console.ReadLine();
@@ -49,19 +48,8 @@ namespace Program
 
         static Dictionary<uint, TextConfig> m_textConfigDic = new Dictionary<uint, TextConfig>(10000);//线上文本表的配置信息
         static Dictionary<uint, TextConfig> m_translationDic = new Dictionary<uint, TextConfig>(5000);//翻译给回来的表
+        static Dictionary<uint, TextConfig> m_lastCompareDic = new Dictionary<uint, TextConfig>(10000);//上次生成的对比表
         static Dictionary<uint, TextCompareConfig> m_textCompareConfigDic;//对比表的数据信息
-
-        /// <summary>
-        /// 生成对比表
-        /// </summary>
-        static void GenerateCompareConfig()
-        {
-            InitTranslationInfo();
-            InitTextConfigInfo();
-            CompareWriteToExcel();
-            ExportNewAddTextConfig();
-            WriteTranslationToOrcTextConfigs();
-        }
 
         /// <summary>
         /// 对比后写入excel
@@ -89,14 +77,20 @@ namespace Program
                 compareConfig.NewChinese = textConfig.Chinese ?? "";
                 compareConfig.OldEnglish = textConfig.English ?? "";
                 TextConfig transConfig;
-                if (m_translationDic.TryGetValue(textConfig.Id, out transConfig))
+                if(m_lastCompareDic.TryGetValue(textConfig.Id, out transConfig))
                 {
                     compareConfig.OldChinese = transConfig.Chinese;
-                    compareConfig.NewEnglish = transConfig.English;
                 }
                 else
                 {
                     compareConfig.OldChinese = "";
+                }
+                if (m_translationDic.TryGetValue(textConfig.Id, out transConfig))
+                {
+                    compareConfig.NewEnglish = transConfig.English;
+                }
+                else
+                {
                     compareConfig.NewEnglish = "";
                 }
                 compareConfig.InitCompareAddStr();
@@ -112,7 +106,6 @@ namespace Program
                 compareSheet.SetCellValue(row, 7, compareConfig.CompareFinalEnglish);
                 row += 1;
             }
-
             compareBook.SaveToFile(ConfigDataMgr.SaveRootPath + "/" + ConfigDataMgr.SecondDateTime + "对比表.xlsx");
         }
 
@@ -151,7 +144,7 @@ namespace Program
         /// </summary>
         static void WriteTranslationToOrcTextConfig(Worksheet sheet)
         {
-            Console.WriteLine("正在写入："+sheet.Name);
+            Console.WriteLine(DateTime.Now.ToString("HH:mm:ss") + "正在写入：" + sheet.Name);
             CellRange firstCell;
             for (int row = 1; row < sheet.Rows.Length; row++)
             {
@@ -161,26 +154,26 @@ namespace Program
                 {
                     CellRange rowData = sheet.Rows[row].Columns[column];
                     firstCell = sheet.Rows[0].Columns[column];
-                    if (string.IsNullOrEmpty(firstCell.Value))
+                    if (string.IsNullOrEmpty(firstCell.DisplayedText))
                     {
                         break;
                     }
-                    if (firstCell.Value.Equals("索引ID".Trim()))
+                    if (firstCell.DisplayedText.Equals("索引ID".Trim()))
                     {
-                        if (string.IsNullOrEmpty(rowData.Value))//这个页签结束了
+                        if (string.IsNullOrEmpty(rowData.DisplayedText))//这个页签结束了
                         {
                             return;
                         }
-                        id = uint.Parse(rowData.Value);
+                        id = uint.Parse(rowData.DisplayedText);
                     }
-                    else if (firstCell.Value.Equals("内容_2".Trim()))
+                    else if (firstCell.DisplayedText.Equals("内容_2".Trim()))
                     {
                         englishIndex = column;
                     }
                 }
                 if(m_textCompareConfigDic.TryGetValue(id, out TextCompareConfig compareConfig))
                 {
-                    sheet.SetCellValue(row + 1, englishIndex + 1, compareConfig.NewEnglish);
+                    sheet.SetCellValue(row + 1, englishIndex + 1, compareConfig.CompareFinalEnglish);
                 }
             }
         }
@@ -210,6 +203,34 @@ namespace Program
         }
 
         /// <summary>
+        /// 初始化上次的对比表信息，将上次对比表信息存入字典
+        /// </summary>
+        static void InitLastCompareInfo()
+        {
+            if (!File.Exists(ConfigDataMgr.LastCompareConfigPath))
+            {
+                Console.WriteLine("上次的对比表不存在,无法读取到新翻译信息");
+                return;
+            }
+            Workbook workbook = new Workbook();
+            workbook.LoadFromFile(ConfigDataMgr.LastCompareConfigPath);
+            Worksheet sheet = workbook.Worksheets[0];
+            Console.WriteLine(DateTime.Now.ToString("HH:mm:ss") + "正在读取上次的对比表信息：" + workbook.FileName);
+            CellRange firstCell;
+            for (int row = 1; row < sheet.Rows.Length; row++)
+            {
+                TextConfig textConfig = new TextConfig();
+                if (string.IsNullOrEmpty(sheet.Rows[row].Columns[0].DisplayedText))
+                {
+                    break;
+                }
+                textConfig.Id = uint.Parse(sheet.Rows[row].Columns[0].DisplayedText.Trim());
+                textConfig.Chinese = sheet.Rows[row].Columns[1].DisplayedText.Trim();
+                m_lastCompareDic.Add(textConfig.Id, textConfig);
+            }
+        }
+
+        /// <summary>
         /// 初始化翻译信息，将翻译信息存入字典
         /// </summary>
         static void InitTranslationInfo()
@@ -222,18 +243,18 @@ namespace Program
             Workbook workbook = new Workbook();
             workbook.LoadFromFile(ConfigDataMgr.TranslationConfigPath);
             Worksheet sheet = workbook.Worksheets[0];
-            Console.WriteLine("正在读取翻译给回来的表格信息：" + workbook.FileName);
+            Console.WriteLine(DateTime.Now.ToString("HH:mm:ss") + "正在读取翻译给回来的表格信息：" + workbook.FileName);
             CellRange firstCell;
             for (int row = 1; row < sheet.Rows.Length; row++)
             {
                 TextConfig textConfig = new TextConfig();
-                if(string.IsNullOrEmpty(sheet.Rows[row].Columns[0].Value))
+                if(string.IsNullOrEmpty(sheet.Rows[row].Columns[0].DisplayedText))
                 {
                     break;
                 }
-                textConfig.Id = uint.Parse(sheet.Rows[row].Columns[0].Value.Trim());
-                textConfig.Chinese = sheet.Rows[row].Columns[1].Value.Trim();
-                textConfig.English = sheet.Rows[row].Columns[2].Value.Trim();
+                textConfig.Id = uint.Parse(sheet.Rows[row].Columns[0].DisplayedText.Trim());
+                textConfig.Chinese = sheet.Rows[row].Columns[1].DisplayedText.Trim();
+                textConfig.English = sheet.Rows[row].Columns[2].DisplayedText.Trim();
                 m_translationDic.Add(textConfig.Id, textConfig);
             }
         }
@@ -274,7 +295,7 @@ namespace Program
         /// <param name="sheet"></param>
         static void GenerateTextConfigInfo(Worksheet sheet)
         {
-            Console.WriteLine("正在读取线上文本表信息：" + sheet.Name);
+            Console.WriteLine(DateTime.Now.ToString("HH:mm:ss") + "正在读取线上文本表信息：" + sheet.Name);
             CellRange firstCell;
             for (int row = 1; row < sheet.Rows.Length; row++)
             {
@@ -283,25 +304,25 @@ namespace Program
                 {
                     CellRange rowData = sheet.Rows[row].Columns[column];
                     firstCell = sheet.Rows[0].Columns[column];
-                    if(string.IsNullOrEmpty(firstCell.Value))
+                    if(string.IsNullOrEmpty(firstCell.DisplayedText))
                     {
                         break;
                     }
-                    if(firstCell.Value.Equals("索引ID".Trim()))
+                    if(firstCell.DisplayedText.Equals("索引ID".Trim()))
                     {
-                        if(string.IsNullOrEmpty(rowData.Value))//这个页签结束了
+                        if(string.IsNullOrEmpty(rowData.DisplayedText))//这个页签结束了
                         {
                             return;
                         }
-                        textConfig.Id = uint.Parse(rowData.Value.Trim());
+                        textConfig.Id = uint.Parse(rowData.DisplayedText.Trim());
                     }
-                    else if (firstCell.Value.Equals("内容_1".Trim()))
+                    else if (firstCell.DisplayedText.Equals("内容_1".Trim()))
                     {
-                        textConfig.Chinese = rowData.Value;
+                        textConfig.Chinese = rowData.DisplayedText;
                     }
-                    else if (firstCell.Value.Equals("内容_2".Trim()))
+                    else if (firstCell.DisplayedText.Equals("内容_2".Trim()))
                     {
-                        textConfig.English = rowData.Value;
+                        textConfig.English = rowData.DisplayedText;
                     }
                 }
                 m_textConfigDic.Add(textConfig.Id, textConfig);
