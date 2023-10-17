@@ -12,7 +12,7 @@ namespace Program
             ConfigDataMgr.Init();
             if(args.Length<=0)
             {
-                args = new string[] { "1" };
+                args = new string[] { "4" };
             }
             
             switch (args[0])
@@ -36,6 +36,9 @@ namespace Program
                     CompareWriteToExcel();
                     ExportNewAddTextConfig();
                     WriteTranslationToOrcTextConfigs();
+                    break;
+                case "4":
+                    InitTextConfigInfo();
                     break;
                 default:
                     Console.WriteLine("参数错误，无法处理表格");
@@ -164,7 +167,14 @@ namespace Program
                         {
                             return;
                         }
-                        id = uint.Parse(rowData.DisplayedText);
+                        if (TryParseUintValue(rowData, out uint tempId))
+                        {
+                            id = tempId;
+                        }
+                        else
+                        {
+                            Console.WriteLine("解析id失败：id:" + rowData.DisplayedText);
+                        }
                     }
                     else if (firstCell.DisplayedText.Equals("内容_2".Trim()))
                     {
@@ -220,13 +230,20 @@ namespace Program
             for (int row = 1; row < sheet.Rows.Length; row++)
             {
                 TextConfig textConfig = new TextConfig();
-                if (string.IsNullOrEmpty(sheet.Rows[row].Columns[0].DisplayedText))
+                if (string.IsNullOrEmpty(sheet.Rows[row].Columns[0].Value))
                 {
                     break;
                 }
-                textConfig.Id = uint.Parse(sheet.Rows[row].Columns[0].DisplayedText.Trim());
-                textConfig.Chinese = sheet.Rows[row].Columns[1].DisplayedText.Trim();
-                m_lastCompareDic.Add(textConfig.Id, textConfig);
+                if(TryParseUintValue(sheet.Rows[row].Columns[0], out uint id))
+                {
+                    textConfig.Id = id;
+                    textConfig.Chinese = sheet.Rows[row].Columns[1].DisplayedText.Trim();
+                    m_lastCompareDic.Add(textConfig.Id, textConfig);
+                }
+                else
+                {
+                    Console.WriteLine("解析失败的id:" + sheet.Rows[row].Columns[0].Value.Trim()+"        中文为："+ sheet.Rows[row].Columns[1].DisplayedText.Trim());
+                }
             }
         }
 
@@ -252,11 +269,48 @@ namespace Program
                 {
                     break;
                 }
-                textConfig.Id = uint.Parse(sheet.Rows[row].Columns[0].DisplayedText.Trim());
-                textConfig.Chinese = sheet.Rows[row].Columns[1].DisplayedText.Trim();
-                textConfig.English = sheet.Rows[row].Columns[2].DisplayedText.Trim();
-                m_translationDic.Add(textConfig.Id, textConfig);
+                if(TryParseUintValue(sheet.Rows[row].Columns[0], out uint tempId))
+                {
+                    textConfig.Id = tempId;
+                    textConfig.Chinese = sheet.Rows[row].Columns[1].DisplayedText.Trim();
+                    textConfig.English = sheet.Rows[row].Columns[2].DisplayedText.Trim();
+                    m_translationDic.Add(textConfig.Id, textConfig);
+                }
             }
+        }
+
+        static bool TryParseUintValue(CellRange cellRange, out uint finalValue)
+        {
+            if(TryParseUintValue(cellRange.Value, out finalValue))
+            {
+                return true;
+            }
+            else if(TryParseUintValue(cellRange.DisplayedText, out finalValue))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        static bool TryParseUintValue(string str, out uint finalValue)
+        {
+            uint tempValue;
+            if(uint.TryParse(str, out tempValue))
+            {
+                finalValue = tempValue;
+                return true;
+            }
+            decimal tempV;
+            if(decimal.TryParse(str, out tempV))
+            {
+                finalValue = (uint)Math.Round(tempV);
+                return true;
+            }
+            finalValue = 0;
+            return false;
         }
 
         /// <summary>
@@ -314,7 +368,14 @@ namespace Program
                         {
                             return;
                         }
-                        textConfig.Id = uint.Parse(rowData.DisplayedText.Trim());
+                        if(TryParseUintValue(rowData, out uint id))
+                        {
+                            textConfig.Id = id;
+                        }
+                        else
+                        {
+                            Console.WriteLine("解析id失败，id:" + rowData.DisplayedText);
+                        }
                     }
                     else if (firstCell.DisplayedText.Equals("内容_1".Trim()))
                     {
@@ -325,7 +386,10 @@ namespace Program
                         textConfig.English = rowData.DisplayedText;
                     }
                 }
-                m_textConfigDic.Add(textConfig.Id, textConfig);
+                if(textConfig.Id != 0)
+                {
+                    m_textConfigDic.Add(textConfig.Id, textConfig);
+                }
             }
         }
     }
